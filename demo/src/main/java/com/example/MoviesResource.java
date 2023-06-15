@@ -9,6 +9,8 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.h2.command.dml.NoOperation;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -25,7 +27,7 @@ public class MoviesResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
+    NoOperation(
             operationId = "getMovie",
             summary = "Get Movies",
             description = "Get all movies inside the list"
@@ -142,5 +144,23 @@ public class MoviesResource {
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
+
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            operationId = "getMovie",
+            summary = "Get Movies",
+            description = "Get all movies inside the list"
+    )
+    @APIResponse(
+            responseCode = "200",
+            description = "Operation completed",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON)
+    )
+    public Response getMovie2(){
+        return Response.ok(movies).build();
+    }
+
 
 }
